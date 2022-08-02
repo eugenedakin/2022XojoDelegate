@@ -8,53 +8,49 @@ This is the code to make a delegate to draw a stick person
   - Level: Advanced
   
   Youtube video:
-[![Xojo Plugin Creation from Scratch](https://github.com/eugenedakin/2022XojoPlugin/blob/main/PluginScreenUpdated.png)](https://youtu.be/Ap3Ufre_RXk)
+[![Xojo Plugin Creation from Scratch](https://github.com/eugenedakin/2022XojoDelegate/blob/main/DelegateDrawing.png)](https://youtu.be/Ap3Ufre_RXk)
 
 Instructions:
 - Install Xojo 2022 r 2
 - Run the xojo_binary-project
 
-AddTwoDLL.h file
-```C++
-#include "WinHeader++.h"
-#include "rb_plugin.h"
-
-RBInteger AddTwo(RBInteger x, RBInteger y);
-
-REALmethodDefinition TestModuleMethods[] = {
-	{ (REALproc)AddTwo, REALnoImplementation, "AddTwo(x as integer, y as integer) as integer", REALconsoleSafe },
-};
-```
-
-AddTwoDLL.cpp file
-```C++
-#include "AddTwoDLL.h"
-
-RBInteger AddTwo(RBInteger x, RBInteger y) {
-	return x + y;
-}
-
-REALmoduleDefinition AddTwodefn = {
-	kCurrentREALControlVersion,
-	"AddTwoDLL", //name of module shown to user
-	TestModuleMethods, //method names
-	sizeof(TestModuleMethods) / sizeof(REALmethodDefinition), //size of methods
-	nil, //no constants
-	nil, //no properties
-};
-
-void PluginEntry(void) {
-	REALRegisterModule(&AddTwodefn);
-}
-```
-
-The file: AddTwoNum.dll can be downloaded and placed in the Xojo 2022 r1.1 plugin folder.
-
-Xojo code
-```xojo
+Pressed Button1 Action event
+```Xojo
 Sub Pressed() Handles Pressed
-  Var Answer As Integer
-  Answer = AddTwoDLL.AddTwo(4,9)
-  Label1.Text = Answer.ToString
+  //Make a new picture
+  Var pic As New Picture(ImageViewer1.Width, ImageViewer1.Height)
+  
+  //Create a new variable
+  Var d As StickDrawDelegate
+  
+  //Get address and invoke each item
+  d = AddressOf DrawHead
+  d.Invoke(pic.Graphics)
+  
+  d = AddressOf DrawBody
+  d.Invoke(pic.Graphics)
+  
+  d = AddressOf DrawArms
+  d.Invoke(pic.Graphics)
+  
+  d = AddressOf DrawLegs
+  d.Invoke(pic.Graphics)
+  
+  //Show the drawn picture in the imageviewer
+  ImageViewer1.Image = pic
+End Sub
+```
+
+DrawArms Method
+```Xojo
+Public Sub DrawArms(g as Graphics)
+  g.PenSize = 2
+  g.DrawingColor = RGB(100, 100, 5)
+  
+  //Draw right arm
+  g.drawline(125,125,150,150)
+  
+  //Draw left arm
+  g.drawline(125,125,100,150)
 End Sub
 ```
