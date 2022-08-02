@@ -14,6 +14,11 @@ Instructions:
 - Install Xojo 2022 r 2
 - Run the xojo_binary-project
 
+Delegate
+```Xojo
+Public Sub StickDrawDelegate(g as Graphics)
+```
+
 Pressed Button1 Action event
 ```Xojo
 Sub Pressed() Handles Pressed
