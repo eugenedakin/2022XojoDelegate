@@ -8,7 +8,7 @@ This is the code to make a delegate to draw a stick person
   - Level: Advanced
   
   Youtube video:
-[![Xojo Plugin Creation from Scratch](https://github.com/eugenedakin/2022XojoDelegate/blob/main/DelegateDrawing.png)](https://youtu.be/Ap3Ufre_RXk)
+[![Xojo Plugin Creation from Scratch](https://github.com/eugenedakin/2022XojoDelegate/blob/main/DelegateDrawing.png)](https://youtu.be/jGfHhRTlrNY)
 
 Instructions:
 - Install Xojo 2022 r 2
